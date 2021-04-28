@@ -2,6 +2,7 @@
 import React from 'react';
 import {Link,Redirect} from "react-router-dom";
 import Loading from "./Loading";
+import Messages from "./Messages";
 import '../style/register.scss';
 import axios from 'axios'
 
@@ -12,7 +13,8 @@ class Login extends React.Component {
     this.state = {
         email: '',
         password:'',
-        redir:'/login'
+        redir:'/login',
+        message: ''
     }
     this.changeHandller = this.changeHandller.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
@@ -37,8 +39,17 @@ class Login extends React.Component {
           })
       })
       .catch(err => {
-        console.log(err);
+        this.setState({
+            message:'email or password not match',
+            isLoading: false
+        })
+        setTimeout(() => {
+            this.setState({
+                message:''
+            })
+        },3000)
       })
+     
   }
 
 
@@ -47,6 +58,7 @@ class Login extends React.Component {
         <div className="wrapper">
             <Loading loading={this.state.isLoading}/>
             <Redirect to={this.state.redir} />
+            <Messages message={this.state.message} />
             <form className="form" onSubmit={this.submitHandler}>
                 <label>
                     <p>email:</p>

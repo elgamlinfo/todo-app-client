@@ -3,7 +3,7 @@ import {Link, Redirect} from "react-router-dom";
 import Loading from "./Loading";
 import '../style/register.scss';
 import axios from 'axios'
-
+import Messages from "./Messages";
 class Signup extends React.Component {
   constructor() {
     super();
@@ -12,7 +12,7 @@ class Signup extends React.Component {
         email: '',
         password:'',
         redir: '/',
-        isLoading: false
+        isLoading: false,
     }
     this.changeHandller = this.changeHandller.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
